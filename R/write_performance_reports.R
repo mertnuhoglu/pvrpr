@@ -1,5 +1,6 @@
 library(dplyr)
 
+#' @export
 write_performance_reports = function(routes, od_table_file = "od_table0.tsv") {
 	dir.create("../out")
 	readr::write_csv(routes, "../out/routes.csv", na = "0")
@@ -36,6 +37,7 @@ write_performance_reports = function(routes, od_table_file = "od_table0.tsv") {
 	WriteXLS::WriteXLS(x0, "../out/report.xlsx", SheetNames = c("trips", "visits", "visits2", "visits_day", "routes_costs", "total", "rotalar", "routes"))
 }
 
+#' @export
 convert_to_customer_routes_format = function(routes, days) {
 	crf = routes %>%
 		left_join(days, by = "week_day") %>%
@@ -47,6 +49,7 @@ convert_to_customer_routes_format = function(routes, days) {
 	  )
 }
 
+#' @export
 trips_with_costs = function(routes, customers, od_table, end_points, points) {
 	r1 = routes %>%
 		dplyr::left_join(customers, by = "customer_id") 
@@ -85,6 +88,7 @@ trips_with_costs = function(routes, customers, od_table, end_points, points) {
 	return(r9)
 }
 
+#' @export
 customers_with_visits = function(trips_w_costs) {
 	r7 = trips_w_costs %>%
 		dplyr::group_by(customer_id, week_day) %>%
@@ -102,6 +106,7 @@ customers_with_visits = function(trips_w_costs) {
   ##> 14254	5	1
 }
 
+#' @export
 customer_visits_per_day = function(customers_with_visits) {
 	cvv = customers_with_visits %>%
 		dplyr::group_by(customer_id) %>%
@@ -125,6 +130,7 @@ customer_visits_per_day = function(customers_with_visits) {
 	return(r8)
 }
 
+#' @export
 routes_with_costs = function(trips_w_costs) {
 	r5 = trips_w_costs %>%
 		dplyr::group_by(salesman_id, week_day) %>%
@@ -146,6 +152,7 @@ routes_with_costs = function(trips_w_costs) {
 	return(r5)
 }
 
+#' @export
 total_costs = function(routes_w_costs) {
 	rs = dplyr::tibble(
 		total_duration = sum(routes_w_costs$route_duration, na.rm = T)
@@ -158,6 +165,7 @@ total_costs = function(routes_w_costs) {
 	return(rs)
 }
 
+#' @export
 start_end_points = function(routes) {
 	salesman_ids = get_salesman()$salesman_id %>% unique
 	week_days = routes$week_day %>% unique

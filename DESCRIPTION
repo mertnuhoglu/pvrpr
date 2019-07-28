@@ -17,3 +17,4 @@ Imports:
     jsonlite,
     rjson,
     WriteXLS
+RoxygenNote: 6.1.1

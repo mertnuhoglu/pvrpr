@@ -1,5 +1,6 @@
 library(dplyr)
 
+#' @export
 musteriler_tsv_2_normal = function(musteriler_df) {
 	d0 = musteriler_df %>%
 		dplyr::rename(
@@ -41,6 +42,7 @@ musteriler_tsv_2_normal = function(musteriler_df) {
 	return(list(points = points, customers = customers, depots = depots))
 }
 
+#' @export
 stlistesi_2_salesman = function(stlistesi_df) {
 	salesman = readr::read_tsv(glue::glue("{PEYMAN_PROJECT_DIR}/pvrp_data/stlistesi.tsv")) %>%
 		dplyr::rename( salesman_id = TerritoryId) %>%

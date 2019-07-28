@@ -1,5 +1,6 @@
 library(dplyr)
 
+#' @export
 main_mevcut_rotalar = function() {
 	days = dplyr::tibble(
 		week_day = 0:5
@@ -14,6 +15,7 @@ main_mevcut_rotalar = function() {
 	write_verification_reports()
 }
 
+#' @export
 main_optimized_routes = function() {
 	file_path = glue::glue("{PEYMAN_PROJECT_DIR}/pvrp/routes.csv")
 	routes_algo = readr::read_csv(file_path) 

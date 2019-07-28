@@ -1,3 +1,4 @@
+#' @export
 rotalar_mevcut_2_routes = function(rotalar_mevcut) {
 	salesman = get_salesman() %>%
 		dplyr::select(salesman_id, salesman_no)
@@ -14,6 +15,7 @@ rotalar_mevcut_2_routes = function(rotalar_mevcut) {
 	return(routes_normal)
 }
 
+#' @export
 routes_algo_2_routes_normal = function(routes) {
 	# input: routes from pvrp algorithm
 	# output: normalized routes
@@ -31,6 +33,7 @@ routes_algo_2_routes_normal = function(routes) {
 	return(routes_normal)
 }
 
+#' @export
 rotalar_to_routes_algo = function(rotalar) {
 	salesman = get_salesman()
 	routes = rotalar %>%

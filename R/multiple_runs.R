@@ -1,5 +1,6 @@
 library(dplyr)
 
+#' @export
 write_total_costs_multiple_runs = function(root_dir) {
 	dirs = list.files(root_dir)
 	rl = list()

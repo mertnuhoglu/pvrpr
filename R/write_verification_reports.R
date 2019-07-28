@@ -1,5 +1,6 @@
 library(dplyr)
 
+#' @export
 write_verification_reports = function() {
 	rc = readr::read_tsv("../out/routes_with_costs.tsv")
 	cv2 = readr::read_tsv("../out/customers_with_visits2.tsv")
@@ -39,27 +40,32 @@ write_verification_reports = function() {
 
 }
 
+#' @export
 verify_visits_len_of_routes = function(routes_w_costs) {
 	vvlr = routes_w_costs %>%
 		filter(visits > 25)
 }
 
+#' @export
 verify_customer_must_days = function(customers_w_visits2, must_days) {
 	vcmd = must_days %>%
 		dplyr::anti_join(customers_w_visits2, by = c("customer_id", "day")) 
 }
 
+#' @export
 verify_customer_removed_days = function(customers_w_visits2, removed_days) {
 	vcrd = removed_days %>%
 		dplyr::inner_join(customers_w_visits2, by = c("customer_id", "day")) 
 }
 
+#' @export
 verify_customer_weekly_visit_frequency = function(customer_visits_p_day, customers2) {
 	vcwvf = customer_visits_p_day %>%
 		dplyr::inner_join(customers2, by = "customer_id") %>%
 		dplyr::filter(weekly_visit_frequency != visits) 
 }
 
+#' @export
 verify_duration_of_routes = function(routes_w_costs) {
 	vdr = routes_w_costs %>%
 		dplyr::filter(duration > 510)

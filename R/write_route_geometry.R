@@ -1,5 +1,6 @@
 library(dplyr)
 
+#' @export
 write_route_geometry = function() {
 	c0 = readr::read_tsv("../out/trips_with_costs.tsv") 
 		#dplyr::select(from_point_id, to_point_id, from_lng, from_lat, to_lng, to_lat)
@@ -19,6 +20,7 @@ write_route_geometry = function() {
 	sf::st_write(twrg, "../out/trips_with_route_geometry.csv", delete_dsn = T)
 }
 
+#' @export
 trips_with_route_geometry = function(trips_w_curl_cmd) {
 	geometry = lapply(trips_w_curl_cmd$file_name, function(f) {
 		j0 = rjson::fromJSON(file=glue::glue("../out/route_json/{f}"))

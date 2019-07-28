@@ -1,6 +1,7 @@
 library(dplyr)
 library(jsonlite)
 
+#' @export
 prepare_od_table = function(od_json) {
 	j0 = jsonlite::fromJSON(od_json)
 	dis0 = j0$distances
@@ -15,6 +16,7 @@ prepare_od_table = function(od_json) {
 	return(r0)
 }
 
+#' @export
 matrix_to_tibble = function(mat) {
 	n = dim(mat)[1]
 	dimnames(mat) = list(c(1:n), c(1:n))
