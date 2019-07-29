@@ -1,13 +1,15 @@
-library(dplyr)
+#' @importFrom magrittr "%>%"
+NULL
+
 
 #' @export
 write_verification_reports = function() {
-	rc = readr::read_tsv(glue::glue("{PEYMAN_PROJECT_DIR}/pvrp/out/routes_with_costs.tsv"))
-	cv2 = readr::read_tsv(glue::glue("{PEYMAN_PROJECT_DIR}/pvrp/out/customers_with_visits2.tsv"))
-	cvpd = readr::read_tsv(glue::glue("{PEYMAN_PROJECT_DIR}/pvrp/out/customer_visits_per_day.tsv"))
+	rc = readr::read_tsv(glue::glue("{pvrpr::PEYMAN_PROJECT_DIR}/pvrp/out/routes_with_costs.tsv"))
+	cv2 = readr::read_tsv(glue::glue("{pvrpr::PEYMAN_PROJECT_DIR}/pvrp/out/customers_with_visits2.tsv"))
+	cvpd = readr::read_tsv(glue::glue("{pvrpr::PEYMAN_PROJECT_DIR}/pvrp/out/customer_visits_per_day.tsv"))
 
 	vdr = verify_duration_of_routes(rc)
-	readr::write_tsv(vdr, glue::glue( "{PEYMAN_PROJECT_DIR}/pvrp/out/verify_duration_of_routes.tsv"), na = "0")
+	readr::write_tsv(vdr, glue::glue( "{pvrpr::PEYMAN_PROJECT_DIR}/pvrp/out/verify_duration_of_routes.tsv"), na = "0")
 	customers2 = read_customers() %>%
 		dplyr::select(customer_id, weekly_visit_frequency, monday:saturday
 		)
@@ -27,16 +29,16 @@ write_verification_reports = function() {
 	removed_days = day_constraints %>%
 		dplyr::filter(visits == -1)
 	vcmd = verify_customer_must_days(cv2, must_days)
-	readr::write_tsv(vcmd, glue::glue( "{PEYMAN_PROJECT_DIR}/pvrp/out/verify_customer_must_days.tsv"), na = "0")
+	readr::write_tsv(vcmd, glue::glue( "{pvrpr::PEYMAN_PROJECT_DIR}/pvrp/out/verify_customer_must_days.tsv"), na = "0")
 	vcrd = verify_customer_removed_days(cv2, removed_days)
-	readr::write_tsv(vcrd, glue::glue( "{PEYMAN_PROJECT_DIR}/pvrp/out/verify_customer_removed_days.tsv"), na = "0")
+	readr::write_tsv(vcrd, glue::glue( "{pvrpr::PEYMAN_PROJECT_DIR}/pvrp/out/verify_customer_removed_days.tsv"), na = "0")
 	vcwvf = verify_customer_weekly_visit_frequency(cvpd, customers2)
-	readr::write_tsv(vcwvf, glue::glue( "{PEYMAN_PROJECT_DIR}/pvrp/out/verify_customer_weekly_visit_frequency.tsv"), na = "0")
+	readr::write_tsv(vcwvf, glue::glue( "{pvrpr::PEYMAN_PROJECT_DIR}/pvrp/out/verify_customer_weekly_visit_frequency.tsv"), na = "0")
 	vvlr = verify_visits_len_of_routes(rc)
-	readr::write_tsv(vvlr, glue::glue( "{PEYMAN_PROJECT_DIR}/pvrp/out/verify_visits_len_of_routes.tsv"), na = "0")
+	readr::write_tsv(vvlr, glue::glue( "{pvrpr::PEYMAN_PROJECT_DIR}/pvrp/out/verify_visits_len_of_routes.tsv"), na = "0")
 
 	x0 = list(vdr, vcmd, vcrd, vcwvf, vvlr)
-	WriteXLS::WriteXLS(x0, glue::glue( "{PEYMAN_PROJECT_DIR}/pvrp/out/verifications.xlsx"), SheetNames = c("durations", "must_days", "removed_days", "visit_frequency", "length_routes"))
+	WriteXLS::WriteXLS(x0, glue::glue( "{pvrpr::PEYMAN_PROJECT_DIR}/pvrp/out/verifications.xlsx"), SheetNames = c("durations", "must_days", "removed_days", "visit_frequency", "length_routes"))
 
 }
 
@@ -68,7 +70,7 @@ verify_customer_weekly_visit_frequency = function(customer_visits_p_day, custome
 #' @export
 verify_duration_of_routes = function(routes_w_costs) {
 	vdr = routes_w_costs %>%
-		dplyr::filter(duration > 510)
+		dplyr::filter(route_duration > 510)
 }
 
 
