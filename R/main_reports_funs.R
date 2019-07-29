@@ -28,3 +28,8 @@ main_optimized_routes = function() {
 	write_verification_reports()
 }
 
+#' @export
+main_write_reports = function(file_path = "{PEYMAN_PROJECT_DIR}/pvrp/out/routes.csv", od_table_file = "od_table0.tsv") {
+	routes = readr::read_csv(file_path)
+	write_performance_reports(routes, od_table_file)
+}
