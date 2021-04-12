@@ -44,19 +44,19 @@ musteriler_tsv_2_normal = function(musteriler_df) {
 
 #' @export
 stlistesi_2_salesman = function(stlistesi_df) {
-	salesman = readr::read_tsv(glue::glue("{PEYMAN_PROJECT_DIR}/pvrp_data/stlistesi.tsv")) %>%
+	salesman = readr::read_tsv(glue::glue("{FMCGVRP_PROJECT_DIR}/pvrp_data/stlistesi.tsv")) %>%
 		dplyr::rename( salesman_id = TerritoryId) %>%
 		dplyr::mutate( salesman_no = dplyr::row_number() - 1) %>%
 		dplyr::select( salesman_id, salesman_no )
 }
 
 main = function() {
-	musteriler_tsv = glue::glue("{PEYMAN_PROJECT_DIR}/pvrp_data/musteriler.tsv")
+	musteriler_tsv = glue::glue("{FMCGVRP_PROJECT_DIR}/pvrp_data/musteriler.tsv")
 	ndir = file.path(dirname(musteriler_tsv), "normal")
 	musteriler_df = readr::read_tsv(musteriler_tsv)
 	nd = musteriler_tsv_2_normal(musteriler_df)
 
-	stlistesi_df = readr::read_tsv(glue::glue("{PEYMAN_PROJECT_DIR}/pvrp_data/stlistesi.tsv"))
+	stlistesi_df = readr::read_tsv(glue::glue("{FMCGVRP_PROJECT_DIR}/pvrp_data/stlistesi.tsv"))
 	salesman = stlistesi_2_salesman(stlistesi_df)
 
 	dir.create(path = ndir, recursive = T)

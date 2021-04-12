@@ -34,13 +34,13 @@ matrix_to_tibble = function(mat) {
 }
 
 test_main = function() {
-	od_json = glue::glue("{PEYMAN_PROJECT_DIR}/pvrp/doc/study/ex/peyman_osrm_kurulumu_20190521/ex13.json")
+	od_json = glue::glue("{FMCGVRP_PROJECT_DIR}/pvrp/doc/study/ex/fmcgvrp_osrm_kurulumu_20190521/ex13.json")
 	r0 = prepare_od_table(od_json)
-	readr::write_tsv(r0, glue::glue("{PEYMAN_PROJECT_DIR}/pvrp/doc/study/ex/peyman_osrm_kurulumu_20190521/od_table.tsv"))
+	readr::write_tsv(r0, glue::glue("{FMCGVRP_PROJECT_DIR}/pvrp/doc/study/ex/fmcgvrp_osrm_kurulumu_20190521/od_table.tsv"))
 }
 
 main = function() {
-	od_json = "$PEYMAN_FILES_DIR/gen/origin_destination.json"
+	od_json = "$FMCGVRP_FILES_DIR/gen/origin_destination.json"
 	r0 = prepare_od_table(od_json)
-	readr::write_tsv(r0, "~/gdrive/mynotes/prj/itr/iterative_mert/peyman/gen/od_table.tsv")
+	readr::write_tsv(r0, "~/gdrive/mynotes/prj/itr/iterative_mert/fmcgvrp/gen/od_table.tsv")
 }

@@ -5,11 +5,11 @@ NULL
 #' @export
 write_performance_reports = function(routes, od_table_file = "od_table0.tsv") {
 	file.rename(
-		glue::glue("{pvrpr::PEYMAN_PROJECT_DIR}/pvrp/out")
-		, glue::glue("{pvrpr::PEYMAN_PROJECT_DIR}/pvrp/out_{format(Sys.time(), '%Y%m%d_%H%M%S')}")
+		glue::glue("{pvrpr::FMCGVRP_PROJECT_DIR}/pvrp/out")
+		, glue::glue("{pvrpr::FMCGVRP_PROJECT_DIR}/pvrp/out_{format(Sys.time(), '%Y%m%d_%H%M%S')}")
 	)
-	dir.create( glue::glue("{pvrpr::PEYMAN_PROJECT_DIR}/pvrp/out"))
-	readr::write_csv(routes, glue::glue("{pvrpr::PEYMAN_PROJECT_DIR}/pvrp/out/routes.csv"), na = "0")
+	dir.create( glue::glue("{pvrpr::FMCGVRP_PROJECT_DIR}/pvrp/out"))
+	readr::write_csv(routes, glue::glue("{pvrpr::FMCGVRP_PROJECT_DIR}/pvrp/out/routes.csv"), na = "0")
 
 	customers = read_customers() %>%
 		dplyr::select(customer_id, point_id, service_time, customer_name)
@@ -32,15 +32,15 @@ write_performance_reports = function(routes, od_table_file = "od_table0.tsv") {
 	tc = total_costs(rc)
 	crf = convert_to_customer_routes_format(routes, days)
 
-	readr::write_tsv(twc, glue::glue("{pvrpr::PEYMAN_PROJECT_DIR}/pvrp/out/trips_with_costs.tsv"), na = "0")
-	readr::write_tsv(cv, glue::glue("{pvrpr::PEYMAN_PROJECT_DIR}/pvrp/out/customers_with_visits.tsv"), na = "0")
-	readr::write_tsv(cv2, glue::glue("{pvrpr::PEYMAN_PROJECT_DIR}/pvrp/out/customers_with_visits2.tsv"), na = "0")
-	readr::write_tsv(cvpd, glue::glue("{pvrpr::PEYMAN_PROJECT_DIR}/pvrp/out/customer_visits_per_day.tsv"), na = "0")
-	readr::write_tsv(rc, glue::glue("{pvrpr::PEYMAN_PROJECT_DIR}/pvrp/out/routes_with_costs.tsv"), na = "0")
-	readr::write_tsv(tc, glue::glue("{pvrpr::PEYMAN_PROJECT_DIR}/pvrp/out/total_costs.tsv"), na = "0")
-	readr::write_tsv(crf, glue::glue("{pvrpr::PEYMAN_PROJECT_DIR}/pvrp/out/rotalar.tsv"), na = "")
+	readr::write_tsv(twc, glue::glue("{pvrpr::FMCGVRP_PROJECT_DIR}/pvrp/out/trips_with_costs.tsv"), na = "0")
+	readr::write_tsv(cv, glue::glue("{pvrpr::FMCGVRP_PROJECT_DIR}/pvrp/out/customers_with_visits.tsv"), na = "0")
+	readr::write_tsv(cv2, glue::glue("{pvrpr::FMCGVRP_PROJECT_DIR}/pvrp/out/customers_with_visits2.tsv"), na = "0")
+	readr::write_tsv(cvpd, glue::glue("{pvrpr::FMCGVRP_PROJECT_DIR}/pvrp/out/customer_visits_per_day.tsv"), na = "0")
+	readr::write_tsv(rc, glue::glue("{pvrpr::FMCGVRP_PROJECT_DIR}/pvrp/out/routes_with_costs.tsv"), na = "0")
+	readr::write_tsv(tc, glue::glue("{pvrpr::FMCGVRP_PROJECT_DIR}/pvrp/out/total_costs.tsv"), na = "0")
+	readr::write_tsv(crf, glue::glue("{pvrpr::FMCGVRP_PROJECT_DIR}/pvrp/out/rotalar.tsv"), na = "")
 	x0 = list(twc, cv, cv2, cvpd, rc, tc, crf, routes)
-	WriteXLS::WriteXLS(x0, glue::glue("{pvrpr::PEYMAN_PROJECT_DIR}/pvrp/out/report.xlsx"), SheetNames = c("trips", "visits", "visits2", "visits_day", "routes_costs", "total", "rotalar", "routes"))
+	WriteXLS::WriteXLS(x0, glue::glue("{pvrpr::FMCGVRP_PROJECT_DIR}/pvrp/out/report.xlsx"), SheetNames = c("trips", "visits", "visits2", "visits_day", "routes_costs", "total", "rotalar", "routes"))
 }
 
 #' @export

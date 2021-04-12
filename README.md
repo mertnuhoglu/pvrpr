@@ -2,7 +2,7 @@
 
 ## Setup pvrpr
 
-Dependencies are installed in `~/projects/itr/peyman/pvrp/scripts/install_software_common.sh`
+Dependencies are installed in `~/projects/itr/fmcgvrp/pvrp/scripts/install_software_common.sh`
 
 ``` bash
 git clone git@bitbucket.org:mertnuhoglu/pvrpr.git
@@ -14,7 +14,7 @@ make build
 
 ## Write performance reports
 
-Follow `~/projects/itr/peyman/pvrp/doc/verifications_peyman.md`
+Follow `~/projects/itr/fmcgvrp/pvrp/doc/verifications_fmcgvrp.md`
 
 ## Generate geometry data
 
@@ -25,7 +25,7 @@ Follow `~/projects/itr/peyman/pvrp/doc/verifications_peyman.md`
 Eğer geometry json dosyalarını henüz indirmediysek:
 
 ``` bash
-bash ~/projects/itr/peyman/pvrpr/scripts/main_write_geometry.sh
+bash ~/projects/itr/fmcgvrp/pvrpr/scripts/main_write_geometry.sh
 ``` 
 
 ### Write geometry files from geometry json files
@@ -33,6 +33,6 @@ bash ~/projects/itr/peyman/pvrpr/scripts/main_write_geometry.sh
 Eğer geometry json dosyaları hazırda bulunuyorsa:
 
 ``` bash
-bash ~/projects/itr/peyman/pvrpr/scripts/write_trips_with_route_geometry.sh
+bash ~/projects/itr/fmcgvrp/pvrpr/scripts/write_trips_with_route_geometry.sh
 ``` 
 

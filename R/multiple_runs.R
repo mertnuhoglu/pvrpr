@@ -19,5 +19,5 @@ write_total_costs_multiple_runs = function(root_dir) {
 }
 
 main_write_total_costs_multiple_runs = function() {
-	write_total_costs_multiple_runs(glue::glue("{PEYMAN_FILES_DIR}/gen/server_runs"))
+	write_total_costs_multiple_runs(glue::glue("{FMCGVRP_FILES_DIR}/gen/server_runs"))
 }
