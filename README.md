@@ -36,6 +36,3 @@ Eğer geometry json dosyaları hazırda bulunuyorsa:
 bash ~/projects/itr/peyman/pvrpr/scripts/write_trips_with_route_geometry.sh
 ``` 
 
-
-
-
